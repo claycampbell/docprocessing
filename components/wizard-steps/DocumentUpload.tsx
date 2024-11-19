@@ -23,14 +23,15 @@ export default function DocumentUpload({ uploadedDocuments, setUploadedDocuments
     if (!event.target.files) return; // Guard against null files
   
     const newFiles = Array.from(event.target.files).map((file) => ({
-      name: file.name,
-      size: `${(file.size / (1024 * 1024)).toFixed(2)} MB`,
-      date: new Date().toISOString().split('T')[0],
-      status: "Uploaded",
+      name: file.name, // TypeScript now understands `file` is of type `File`
+      size: `${(file.size / (1024 * 1024)).toFixed(2)} MB`, // Convert size to MB
+      date: new Date().toISOString().split("T")[0], // Format date
+      status: "Uploaded", // Default status
     }));
   
-    setUploadedDocuments((prevDocuments) => [...prevDocuments, ...newFiles]);
+    setUploadedDocuments((prev) => [...prev, ...newFiles]); // Update state
   };
+  
   
   const handleS3DocumentSelect = (id) => {
     setS3Documents(s3Documents.map(doc =>

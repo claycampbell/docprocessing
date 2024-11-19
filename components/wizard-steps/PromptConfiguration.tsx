@@ -58,7 +58,9 @@ export default function PromptConfiguration({ extractedResults, setExtractedResu
                 <TableCell>{field.name}</TableCell>
                 <TableCell>{field.value}</TableCell>
                 <TableCell>
-                  <Badge variant={field.status === 'Active' ? 'success' : 'secondary'}>{field.status}</Badge>
+                <Badge variant={field.status === "Active" ? "secondary" : "default"}>
+  {field.status}
+</Badge>
                 </TableCell>
                 <TableCell>
                   <Button variant="ghost" size="icon" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200">
