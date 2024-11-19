@@ -19,16 +19,19 @@ export default function DocumentUpload({ uploadedDocuments, setUploadedDocuments
     { id: 4, name: "agreement_v2.pdf", size: "1.5 MB", lastModified: "2023-06-03", selected: false },
   ])
 
-  const handleFileUpload = (event) => {
-    const newFiles = Array.from(event.target.files).map(file => ({
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return; // Guard against null files
+  
+    const newFiles = Array.from(event.target.files).map((file) => ({
       name: file.name,
       size: `${(file.size / (1024 * 1024)).toFixed(2)} MB`,
       date: new Date().toISOString().split('T')[0],
-      status: "Uploaded"
-    }))
-    setUploadedDocuments([...uploadedDocuments, ...newFiles])
-  }
-
+      status: "Uploaded",
+    }));
+  
+    setUploadedDocuments((prevDocuments) => [...prevDocuments, ...newFiles]);
+  };
+  
   const handleS3DocumentSelect = (id) => {
     setS3Documents(s3Documents.map(doc =>
       doc.id === id ? { ...doc, selected: !doc.selected } : doc
@@ -53,7 +56,16 @@ export default function DocumentUpload({ uploadedDocuments, setUploadedDocuments
   const filteredS3Documents = s3Documents.filter(doc =>
     doc.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
-
+  const getVariant = (status: string): "default" | "secondary" | "destructive" | "outline" => {
+    switch (status) {
+      case "Completed":
+        return "secondary"; // Map to secondary for success
+      case "In Progress":
+        return "default"; // Map to default for warning
+      default:
+        return "default";
+    }
+  };
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -152,7 +164,7 @@ export default function DocumentUpload({ uploadedDocuments, setUploadedDocuments
                 <TableCell>{doc.size}</TableCell>
                 <TableCell>{doc.date}</TableCell>
                 <TableCell>
-                  <Badge variant={doc.status === 'Completed' ? 'success' : 'warning'}>{doc.status}</Badge>
+                  <Badge variant={getVariant(doc.status)}>{doc.status}</Badge>
                 </TableCell>
                 <TableCell>
                   <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200">
