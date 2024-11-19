@@ -88,14 +88,6 @@
         "async": false
       }
     },
-    "(app-client)/./components/ui/tooltip.tsx": {
-      "*": {
-        "id": "(sc_client)/./components/ui/tooltip.tsx",
-        "name": "*",
-        "chunks": [],
-        "async": false
-      }
-    },
     "(app-client)/./components/wizard-steps/DocumentUpload.tsx": {
       "*": {
         "id": "(sc_client)/./components/wizard-steps/DocumentUpload.tsx",
@@ -317,14 +309,6 @@
     },
     "C:\\Users\\clayc\\OneDrive\\Documents\\GitHub\\docprocessing\\components\\ui\\select.tsx": {
       "id": "(app-client)/./components/ui/select.tsx",
-      "name": "*",
-      "chunks": [
-        "app/page:static/chunks/app/page.js"
-      ],
-      "async": false
-    },
-    "C:\\Users\\clayc\\OneDrive\\Documents\\GitHub\\docprocessing\\components\\ui\\tooltip.tsx": {
-      "id": "(app-client)/./components/ui/tooltip.tsx",
       "name": "*",
       "chunks": [
         "app/page:static/chunks/app/page.js"
