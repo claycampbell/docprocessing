@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { DayPicker } from "react-day-picker"
+import { DayPicker, SelectSingleEventHandler } from "react-day-picker"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -73,14 +73,14 @@ function Calendar({
           ...classNames,
         }}
         components={{
-          IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
-          IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
+          IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" {...props} />,
+          IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" {...props} />,
         }}
         selected={selectedDate}
-        onSelect={(date) => {
-          setSelectedDate(date)
-          if (date) handleAddEvent(date)
-        }}
+        onSelect={(date, selectedDay, modifier) => {
+          setSelectedDate(date);
+          if (date) handleAddEvent(date);
+        }} as SelectSingleEventHandler
         {...props}
       />
       <div className="mt-4">
