@@ -109,6 +109,13 @@ export default function ProcessingOverview() {
           </TableBody>
         </Table>
       </div>
+      <div className="mt-6">
+  <h3 className="text-lg font-semibold mb-2 text-blue-700 dark:text-blue-300">Select Processing Date</h3>
+  <div className="flex items-center space-x-4">
+    <Input type="date" className="w-[200px]" />
+    <Button onClick={() => console.log("Date selected")}>Set Processing Date</Button>
+  </div>
+</div>
     </div>
   )
 }
